@@ -13,23 +13,17 @@ def insert_sort(array):
 
 #QUICK SORT
 def quick_sort_in_place(array, i, j):
-    if((j - i) >= 1) :
+    if i < j :
         pivotIndx = j
-        leftIndex = i
-        rightIndex = i
-        while (leftIndex <= i and rightIndex <= j):
-            while (rightIndex < pivotIndx):
-                rightIndex += 1
-                if(array[rightIndex] < array[leftIndex] and array[rightIndex] < array[pivotIndx]):
-                    swap(array, leftIndex, rightIndex)
+        leftIndex = i - 1
+        for rightIndex in range (i, j + 1):
+                if(array[rightIndex] <= array[pivotIndx]):
                     leftIndex += 1
-            if (array[leftIndex] > array[pivotIndx]):
-                swap(array, leftIndex, pivotIndx)
-            pivotIndx = leftIndex
-            leftIndex += 1
+                    swap(array, leftIndex, rightIndex)
 
-        quick_sort_in_place(array, i, pivotIndx - 1)
-        quick_sort_in_place(array, leftIndex, j)
+        quick_sort_in_place(array, i, leftIndex - 1)
+        quick_sort_in_place(array, leftIndex + 1, j)
+
 
 
 #MERGE SORT
@@ -81,19 +75,32 @@ def counting_sort(array, low, high):
 
 #SELECTION SORT
 def minIndex(array, i, j):
-    min = i;
+    mIndex = i;
     for k in range(i + 1, j):
-        if(array[k]) < array[min]:
-            min = k
-    return min
+        if(array[k]) < array[mIndex]:
+            mIndex = k
+    return mIndex
 
 def select_sort(array):
     for i  in range (0, len(array) - 1):
-        min = minIndex(array, i, len(array))
-        if (minIndex != array[i]):
-            swap(array, i, min)
+        mIndex = minIndex(array, i, len(array))
+        if (mIndex != array[i]):
+            swap(array, i, mIndex)
 
-
+#BUCKET SORT
+def bucket_sort(array, maxElement):
+    buckets = []
+    for i in range(maxElement / 10 + 2):
+        buckets.append([])
+    for number in array:
+        buckets[number / 10].append(number)
+    for bucket in range(len(buckets)):
+        quick_sort_in_place(buckets[bucket], 0, len(buckets[bucket]) - 1)
+    index = 0
+    for  k in range(len(buckets)):
+        for number in buckets[k]:
+            array[index] = number
+            index += 1
 #SWAP function
 def swap(array, i, j):
     array[i], array[j] = array[j], array[i]
