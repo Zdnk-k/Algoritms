@@ -59,6 +59,21 @@ def counting_sort(array, low, high):
             k += 1
     return array
 
+#SELECTION SORT
+def minIndex(array, i, j):
+    min = i;
+    for k in range(i + 1, j):
+        if(array[k]) < array[min]:
+            min = k
+    return min
+
+def select_sort(array):
+    for i  in range (0, len(array) - 1):
+        min = minIndex(array, i, len(array))
+        if (minIndex != array[i]):
+            swap(array, i, min)
+
+
 #SWAP function
 def swap(array, i, j):
     array[i], array[j] = array[j], array[i]
