@@ -1,5 +1,4 @@
 #Sorting algoritms written in Pyhton
-#Mainly for IB002
 
 
 #INSERTION SORT
@@ -11,6 +10,27 @@ def insert_sort(array):
             array[j] = array[j - 1]
             j = j - 1
         array[j] = tmp
+
+#QUICK SORT
+def quick_sort_in_place(array, i, j):
+    if((j - i) >= 1) :
+        pivotIndx = j
+        leftIndex = i
+        rightIndex = i
+        while (leftIndex <= i and rightIndex <= j):
+            while (rightIndex < pivotIndx):
+                rightIndex += 1
+                if(array[rightIndex] < array[leftIndex] and array[rightIndex] < array[pivotIndx]):
+                    swap(array, leftIndex, rightIndex)
+                    leftIndex += 1
+            if (array[leftIndex] > array[pivotIndx]):
+                swap(array, leftIndex, pivotIndx)
+            pivotIndx = leftIndex
+            leftIndex += 1
+
+        quick_sort_in_place(array, i, pivotIndx - 1)
+        quick_sort_in_place(array, leftIndex, j)
+
 
 #MERGE SORT
 def merge(array, aux, left, mid, right):
