@@ -1,4 +1,4 @@
-#Sorting algoritms written in Pyhton
+#Sorting algoritms written in Python
 
 
 #INSERTION SORT
@@ -101,6 +101,7 @@ def bucket_sort(array, maxElement):
         for number in buckets[k]:
             array[index] = number
             index += 1
+
 #SWAP function
 def swap(array, i, j):
     array[i], array[j] = array[j], array[i]
